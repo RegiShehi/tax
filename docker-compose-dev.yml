@@ -2,13 +2,10 @@ version: '3'
 services:
   strapi:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       context: ./backend
-    container_name: strapi
     volumes:
       - /app/node_modules
       - ./backend:/app
-    environment:
-        NODE_ENV: PRODUCTION
     ports:
       - 1337:1337
