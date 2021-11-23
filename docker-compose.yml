@@ -12,6 +12,7 @@ services:
         NODE_ENV: PRODUCTION
     ports:
       - 1337:1337
+      
   frontend:
     build:
       dockerfile: .

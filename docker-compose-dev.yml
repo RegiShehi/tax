@@ -1,5 +1,16 @@
 version: '3'
 services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - 4000:80
+    depends_on:
+      - strapi
+      - frontend
+
   strapi:
     build:
       dockerfile: Dockerfile.dev
@@ -9,11 +20,11 @@ services:
       - ./backend:/app
     ports:
       - 1337:1337
+
   frontend:
     build:
       dockerfile: Dockerfile.dev
       context: ./frontend
-    restart: always
     volumes:
       - ./frontend:/app
       - /app/node_modules
