@@ -1,8 +1,19 @@
 version: '3'
 services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: .
+      context: ./nginx
+    ports:
+      - 4000:80
+    depends_on:
+      - strapi
+      - frontend
+
   strapi:
     build:
-      dockerfile: Dockerfile
+      dockerfile: .
       context: ./backend
     container_name: strapi
     volumes:
