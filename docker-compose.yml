@@ -1,7 +1,7 @@
 version: '3'
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:prod
     restart: always
     build:
       dockerfile: .
@@ -16,7 +16,7 @@ services:
     build:
       dockerfile: .
       context: ./backend
-    image: strapi:latest
+    image: strapi:prod
     container_name: strapi
     volumes:
       - /app/node_modules
@@ -30,7 +30,7 @@ services:
   #   build:
   #     dockerfile: .
   #     context: ./frontend
-  #   image: frontend:latest
+  #   image: frontend:prod
   #   restart: always
   #   volumes:
   #     - ./frontend:/app
@@ -40,7 +40,7 @@ services:
   #     - 3000:3000
 
   frontend:
-    image: frontend:latest
+    image: frontend:prod
     container_name: app-prod
     build:
       dockerfile: .
