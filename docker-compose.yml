@@ -1,7 +1,57 @@
+# version: '3'
+# services:
+#   nginx:
+#     image: nginx:prod
+#     restart: always
+#     build:
+#       dockerfile: .
+#       context: ./nginx
+#     ports:
+#       - 4000:80
+#     depends_on:
+#       - strapi
+#       - frontend
+
+#   strapi:
+#     build:
+#       dockerfile: .
+#       context: ./backend
+#     image: strapi:prod
+#     container_name: strapi
+#     volumes:
+#       - /app/node_modules
+#       - ./backend:/app
+#     environment:
+#         NODE_ENV: PRODUCTION
+#     ports:
+#       - 1337:1337
+      
+#   # frontend:
+#   #   build:
+#   #     dockerfile: .
+#   #     context: ./frontend
+#   #   image: frontend:prod
+#   #   restart: always
+#   #   volumes:
+#   #     - ./frontend:/app
+#   #     - /app/node_modules
+#   #     - /app/.next
+#   #   ports:
+#   #     - 3000:3000
+
+#   frontend:
+#     image: frontend:prod
+#     container_name: app-prod
+#     build:
+#       dockerfile: .
+#       context: ./frontend1
+#     ports:
+#       - 3000:3000
+
 version: '3'
 services:
   nginx:
-    image: nginx:prod
+    image: public.ecr.aws/v7f1v7z3/tax-dd-ecr-nginx:latest
     restart: always
     build:
       dockerfile: .
@@ -16,7 +66,7 @@ services:
     build:
       dockerfile: .
       context: ./backend
-    image: strapi:prod
+    image: public.ecr.aws/v7f1v7z3/tax-dd-ecr-strapi:latest
     container_name: strapi
     volumes:
       - /app/node_modules
@@ -25,22 +75,9 @@ services:
         NODE_ENV: PRODUCTION
     ports:
       - 1337:1337
-      
-  # frontend:
-  #   build:
-  #     dockerfile: .
-  #     context: ./frontend
-  #   image: frontend:prod
-  #   restart: always
-  #   volumes:
-  #     - ./frontend:/app
-  #     - /app/node_modules
-  #     - /app/.next
-  #   ports:
-  #     - 3000:3000
 
   frontend:
-    image: frontend:prod
+    image: public.ecr.aws/v7f1v7z3/tax-dd-ecr-frontend:latest
     container_name: app-prod
     build:
       dockerfile: .
