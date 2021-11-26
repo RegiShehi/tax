@@ -1,18 +1,18 @@
-FROM node:alpine
+FROM node:14-alpine AS builder
+ENV NODE_ENV production
 
 WORKDIR /app
 
 COPY package.json .
 COPY yarn.lock .
+RUN yarn install --production
 
-RUN yarn install
-
-COPY . /app
-
-ENV NODE_ENV production
-
+COPY . .
 RUN yarn build
 
-EXPOSE 3000
+FROM nginx:1.21.0-alpine as production
+ENV NODE_ENV production
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html
 
-CMD ["yarn", "start"]
+EXPOSE 3000

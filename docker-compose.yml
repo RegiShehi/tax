@@ -39,22 +39,13 @@
 #   #   ports:
 #   #     - 3000:3000
 
-#   frontend:
-#     image: frontend:prod
-#     container_name: app-prod
-#     build:
-#       dockerfile: .
-#       context: ./frontend1
-#     ports:
-#       - 3000:3000
-
 version: '3'
 services:
   nginx:
     image: public.ecr.aws/v7f1v7z3/tax-dd-ecr-nginx:latest
     restart: always
     build:
-      dockerfile: .
+      dockerfile: Dockerfile
       context: ./nginx
     ports:
       - 4000:80
@@ -64,7 +55,7 @@ services:
 
   strapi:
     build:
-      dockerfile: .
+      dockerfile: Dockerfile
       context: ./backend
     image: public.ecr.aws/v7f1v7z3/tax-dd-ecr-strapi:latest
     container_name: strapi
@@ -80,7 +71,7 @@ services:
     image: public.ecr.aws/v7f1v7z3/tax-dd-ecr-frontend:latest
     container_name: app-prod
     build:
-      dockerfile: .
-      context: ./frontend1
+      dockerfile: Dockerfile
+      context: ./frontend
     ports:
       - 3000:3000

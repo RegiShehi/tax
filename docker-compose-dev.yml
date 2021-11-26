@@ -2,6 +2,8 @@ version: '3'
 services:
   nginx:
     restart: always
+    image: nginx:dev
+    container_name: nginx-dev
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
@@ -15,6 +17,8 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./backend
+    image: strapi:dev
+    container_name: strapi-dev
     volumes:
       - /app/node_modules
       - ./backend:/app
@@ -25,9 +29,10 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./frontend
+    image: frontend:dev
+    container_name: frontend-dev
     volumes:
       - ./frontend:/app
       - /app/node_modules
-      - /app/.next
     ports:
       - 3000:3000
